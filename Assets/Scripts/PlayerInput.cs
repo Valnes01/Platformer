@@ -6,10 +6,14 @@ namespace Platformer.Inputs
 
     public class PlayerInput : MonoBehaviour
     {
-        private const string horizontalAxis = "Horizontal";
+        public bool isActivatorSKeyDown = false;
+        public bool isActivatorPlatform = false;
+        public bool isActivatorEKyeDown = false;
+        public bool isActiveEButton = false;
 
-        private Vector2 movement;
+        private const string horizontalAxis = "Horizontal";
         private PlayerMovement PlayerMovement;
+        private Vector2 movement;
 
         private void Awake()
         {
@@ -21,15 +25,35 @@ namespace Platformer.Inputs
             float horizontal = Input.GetAxis(horizontalAxis);
 
             movement = new Vector2(horizontal, 0);
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PlayerMovement.JumpCharacter();
+            }
         }
 
         private void FixedUpdate()
         {
             PlayerMovement.MoveCharacter(movement);
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (isActivatorSKeyDown)
             {
-                PlayerMovement.JumpCharacter();
+                if (Input.GetKey(KeyCode.S))
+                {
+                    isActivatorPlatform = true;
+                }
+            }
+
+            if (isActivatorEKyeDown)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    isActiveEButton = true;
+                }
+                else
+                {
+                    isActiveEButton = false;
+                }
             }
         }
     }

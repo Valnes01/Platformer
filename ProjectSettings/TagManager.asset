@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Flame
   - 
   - 
   - 
@@ -47,6 +47,12 @@ TagManager:
   - name: Platform
     uniqueID: 1050808291
     locked: 0
+  - name: Interection objects
+    uniqueID: 898663643
+    locked: 0
   - name: Characters
     uniqueID: 3515568723
+    locked: 0
+  - name: Front Objects
+    uniqueID: 3507524851
     locked: 0

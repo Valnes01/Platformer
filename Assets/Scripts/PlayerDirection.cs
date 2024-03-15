@@ -5,7 +5,6 @@ public class PlayerDirection : MonoBehaviour
     private Animator PlayerAnimator;
     private SpriteRenderer PlayerRenderer;
     private Rigidbody2D PlayerRigidbody;
-
     private bool isRightMovement = false;
 
     private void Awake()
@@ -13,6 +12,13 @@ public class PlayerDirection : MonoBehaviour
         PlayerAnimator = GetComponent<Animator>();
         PlayerRenderer = GetComponent<SpriteRenderer>();
         PlayerRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        CheckDirectionCharacter();
+        CheckRunCharacter();
+        CheckJumpCharacter();
     }
 
     private void CheckDirectionCharacter()
@@ -46,13 +52,15 @@ public class PlayerDirection : MonoBehaviour
          
     private void CheckJumpCharacter()
     {
-        if(PlayerRigidbody.velocity.y > 0)
+        if (PlayerRigidbody.velocity.y > 0)
         {
             PlayerAnimator.SetBool("isWarriorJump", true);
+            PlayerAnimator.SetBool("isWarriorDown", false);
         }
         else if(PlayerRigidbody.velocity.y < 0)
         {
             PlayerAnimator.SetBool("isWarriorDown", true);
+            PlayerAnimator.SetBool("isWarriorJump", false);
         }
         else if (PlayerRigidbody.velocity.y == 0)
         {
@@ -60,12 +68,4 @@ public class PlayerDirection : MonoBehaviour
             PlayerAnimator.SetBool("isWarriorJump", false);
         }
     }
-
-    private void Update()
-    {
-        CheckDirectionCharacter();
-        CheckJumpCharacter();
-        CheckRunCharacter();
-    }
-
 }
